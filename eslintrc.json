@@ -1,0 +1,7 @@
+{
+  "extends": "standard",
+  "rules": {
+    "max-depth": ["error", 4],
+    "max-nested-callbacks": ["error", 4]
+  }
+}
