@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
-const opts = require('./options.js')
+const command = require('sergeant')
+const lint = require('./index')
 
-require('standard-engine').cli(opts)
+command('lint', ({ option, parameter }) => {
+  option('fix', {
+    description: 'fix what can be fixed'
+  })
+
+  return (args) => lint({ cwd: process.cwd() })(args)
+})(process.argv.slice(2))

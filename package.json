@@ -1,31 +1,27 @@
 {
   "name": "@erickmerchant/lint",
-  "version": "0.0.0",
-  "description": "standard plus some other rules",
-  "keywords": [],
-  "author": "Erick Merchant <erickmerchant@gmail.com>",
-  "license": "MIT",
+  "version": "1.0.0",
+  "description": "lint js and css",
   "bin": {
     "lint": "./cli.js"
   },
   "scripts": {
-    "test": "exit 0"
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erickmerchant/lint.git"
   },
-  "bugs": {
-    "url": "https://github.com/erickmerchant/lint/issues"
-  },
-  "homepage": "https://github.com/erickmerchant/lint#readme",
+  "keywords": [],
+  "author": "Erick Merchant <erickmerchant@gmail.com>",
+  "license": "ISC",
   "dependencies": {
-    "eslint": "^5.9.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "standard-engine": "^10.0.0"
+    "eslint": "^5.10.0",
+    "sergeant": "^23.1.0",
+    "stylelint": "^9.9.0"
+  },
+  "devDependencies": {
+    "execa": "^1.0.0",
+    "tape": "^4.9.1"
   }
 }

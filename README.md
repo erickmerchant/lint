@@ -1,3 +1,9 @@
 # @erickmerchant/lint
 
-standard plus some other rules
+lint js and css
+
+## Usage
+
+```
+npx lint -h
+```
