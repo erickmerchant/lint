@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const command = require('sergeant')
+
 const lint = require('./index')
 
 command('lint', ({ option, parameter }) => {

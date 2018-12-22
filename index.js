@@ -1,5 +1,7 @@
 const stylelint = require('stylelint')
+
 const eslint = require('eslint')
+
 const path = require('path')
 
 module.exports = (deps) => {
@@ -28,9 +30,9 @@ module.exports = (deps) => {
       }
     })
 
-    var CLIEngine = eslint.CLIEngine
+    const CLIEngine = eslint.CLIEngine
 
-    var cli = new CLIEngine({
+    const cli = new CLIEngine({
       parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module'
@@ -40,12 +42,37 @@ module.exports = (deps) => {
       fix: args.fix,
       rules: {
         semi: ['error', 'never'],
-        indent: ['error', 2]
+        indent: ['error', 2, {
+          SwitchCase: 1
+        }],
+        // 'no-irregular-whitespace': ['error'],
+        // 'no-multi-spaces': ['error'],
+        // 'brace-style': ['error', '1tbs', {
+        //   allowSingleLine: true
+        // }],
+        // 'block-spacing': ['error', 'never'],
+        // curly: ['error', 'multi-line'],
+        // 'func-call-spacing': ['error', 'never'],
+        // 'space-before-function-paren': ['error', 'always'],
+        // quotes: ['error', 'single'],
+        // 'space-before-blocks': 'error',
+        // 'no-var': 'error',
+        // 'prefer-const': 'error',
+        // 'quote-props': ['error', 'as-needed'],
+        // 'prefer-template': ['error'],
+        // 'template-curly-spacing': ['error', 'always'],
+        // 'padded-blocks': ['error', 'never'],
+        // 'padding-line-between-statements': ['error', {
+        //   blankLine: 'always',
+        //   prev: '*',
+        //   next: '*'
+        // }],
+        // 'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }]
       }
     })
 
     // lint myfile.js and all files in lib/
-    var report = cli.executeOnFiles([path.join(deps.cwd, '**/*.{js,mjs}')])
+    const report = cli.executeOnFiles([path.join(deps.cwd, '**/*.{js,mjs}')])
 
     for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
       for (const message of result.messages) {
