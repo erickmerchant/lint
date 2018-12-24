@@ -9,5 +9,13 @@ command('lint', ({ option, parameter }) => {
     description: 'fix what can be fixed'
   })
 
+  parameter('files', {
+    description: 'what files to lint',
+    type (val) {
+      return val
+    },
+    multiple: true
+  })
+
   return (args) => lint({ cwd: process.cwd() })(args)
 })(process.argv.slice(2))

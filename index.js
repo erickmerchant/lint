@@ -4,10 +4,14 @@ const eslint = require('eslint')
 
 const path = require('path')
 
+const globby = require('globby')
+
 module.exports = (deps) => {
   return async (args) => {
+    const files = await globby(args.files, { gitignore: true })
+
     await stylelint.lint({
-      files: path.join(deps.cwd, '**/*.css'),
+      files: files.filter((file) => ['.css'].includes(path.extname(file))),
       fix: args.fix,
       formatter (results) {
         for (const result of results.filter((r) => r.errored)) {
@@ -82,34 +86,85 @@ module.exports = (deps) => {
         'require-atomic-updates': 'error',
         'use-isnan': 'error',
         'valid-typeof': 'error',
-        // 'no-irregular-whitespace': ['error'],
-        // 'no-multi-spaces': ['error'],
-        // 'brace-style': ['error', '1tbs', {
-        //   allowSingleLine: true
-        // }],
-        // 'block-spacing': ['error', 'never'],
-        // curly: ['error', 'multi-line'],
-        // 'func-call-spacing': ['error', 'never'],
-        // 'space-before-function-paren': ['error', 'always'],
-        // quotes: ['error', 'single'],
-        // 'space-before-blocks': 'error',
-        // 'no-var': 'error',
-        // 'prefer-const': 'error',
-        // 'quote-props': ['error', 'as-needed'],
-        // 'prefer-template': ['error'],
-        // 'template-curly-spacing': ['error', 'always'],
-        // 'padded-blocks': ['error', 'never'],
-        // 'padding-line-between-statements': ['error', {
-        //   blankLine: 'always',
-        //   prev: '*',
-        //   next: '*'
-        // }],
-        // 'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }]
+        // best practices
+        // https://eslint.org/docs/rules/block-scoped-var
+        // https://eslint.org/docs/rules/class-methods-use-this
+        // https://eslint.org/docs/rules/complexity
+        // https://eslint.org/docs/rules/consistent-return
+        // https://eslint.org/docs/rules/default-case
+        // https://eslint.org/docs/rules/max-classes-per-file
+        // https://eslint.org/docs/rules/no-empty-function
+        // https://eslint.org/docs/rules/no-empty-pattern
+        // https://eslint.org/docs/rules/no-eq-null
+        // https://eslint.org/docs/rules/no-extra-bind
+        // https://eslint.org/docs/rules/no-extra-label
+        // https://eslint.org/docs/rules/no-iterator
+        // https://eslint.org/docs/rules/no-magic-numbers
+        // https://eslint.org/docs/rules/no-restricted-properties
+        // https://eslint.org/docs/rules/no-script-url
+        // https://eslint.org/docs/rules/no-unused-labels
+        // https://eslint.org/docs/rules/no-useless-call
+        // https://eslint.org/docs/rules/no-warning-comments
+        // https://eslint.org/docs/rules/require-await
+        // https://eslint.org/docs/rules/require-unicode-regexp
+        // https://eslint.org/docs/rules/vars-on-top
+        // https://eslint.org/docs/rules/wrap-iife
+
+        'accessor-pairs': 'error',
+        'array-callback-return': 'error',
+        curly: ['error', 'multi-line'],
+        'dot-location': ['error', 'property'],
+        'dot-notation': 'error',
+        'eqeqeq': ['error', 'always', { 'null': 'never' }],
+        'guard-for-in': 'error',
+        'no-alert': 'error',
+        'no-caller': 'error',
+        'no-case-declarations': 'error',
+        'no-div-regex': 'error',
+        'no-else-return': 'error',
+        'no-eval': 'error',
+        'no-extend-native': 'error',
+        'no-fallthrough': 'error',
+        'no-floating-decimal': 'error',
+        'no-global-assign': 'error',
+        'no-implicit-coercion': 'error',
+        'no-implicit-globals': 'error',
+        'no-implied-eval': 'error',
+        'no-invalid-this': 'error',
+        'no-labels': 'error',
+        'no-lone-blocks': 'error',
+        'no-loop-func': 'error',
+        'no-multi-spaces': 'error',
+        'no-multi-str': 'error',
+        'no-new': 'error',
+        'no-new-func': 'error',
+        'no-new-wrappers': 'error',
+        'no-octal': 'error',
+        'no-octal-escape': 'error',
+        'no-param-reassign': 'error',
+        'no-proto': 'error',
+        'no-redeclare': 'error',
+        'no-return-assign': 'error',
+        'no-return-await': 'error',
+        'no-self-assign': 'error',
+        'no-self-compare': 'error',
+        'no-sequences': 'error',
+        'no-throw-literal': 'error',
+        'no-unmodified-loop-condition': 'error',
+        'no-unused-expressions': 'error',
+        'no-useless-concat': 'error',
+        'no-useless-escape': 'error',
+        'no-useless-return': 'error',
+        'no-void': 'error',
+        'no-with': 'error',
+        'prefer-promise-reject-errors': 'error',
+        radix: 'error',
+        yoda: 'error'
       }
     })
 
     // lint myfile.js and all files in lib/
-    const report = cli.executeOnFiles([path.join(deps.cwd, '**/*.{js,mjs}')])
+    const report = cli.executeOnFiles(files.filter((file) => ['.mjs', '.js'].includes(path.extname(file))))
 
     for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
       for (const message of result.messages) {
