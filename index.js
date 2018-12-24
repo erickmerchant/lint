@@ -159,7 +159,19 @@ module.exports = (deps) => {
         'no-with': 'error',
         'prefer-promise-reject-errors': 'error',
         radix: 'error',
-        yoda: 'error'
+        yoda: 'error',
+        // variables
+        // https://eslint.org/docs/rules/init-declarations
+        // https://eslint.org/docs/rules/no-label-var
+        // https://eslint.org/docs/rules/no-restricted-globals
+        // https://eslint.org/docs/rules/no-shadow
+        // https://eslint.org/docs/rules/no-undefined
+        // https://eslint.org/docs/rules/no-use-before-define
+        'no-delete-var': 'error',
+        'no-shadow-restricted-names': 'error',
+        'no-undef': 'error',
+        'no-undef-init': 'error',
+        'no-unused-vars': 'error',
       }
     })
 
