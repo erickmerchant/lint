@@ -46,9 +46,6 @@ module.exports = (deps) => {
       fix: args.fix,
       rules: {
         semi: ['error', 'never'],
-        indent: ['error', 2, {
-          SwitchCase: 1
-        }],
         // possible errors
         // https://eslint.org/docs/rules/no-console
         // https://eslint.org/docs/rules/no-extra-parens
@@ -174,8 +171,7 @@ module.exports = (deps) => {
         // node.js
         // https://eslint.org/docs/rules/callback-return
         // https://eslint.org/docs/rules/global-require
-        // https://eslint.org/docs/rules/handle-callback-err
-        // https://eslint.org/docs/rules/no-buffer-constructor
+
         // https://eslint.org/docs/rules/no-mixed-requires
         // https://eslint.org/docs/rules/no-new-require
         // https://eslint.org/docs/rules/no-path-concat
@@ -183,37 +179,21 @@ module.exports = (deps) => {
         // https://eslint.org/docs/rules/no-process-exit
         // https://eslint.org/docs/rules/no-restricted-modules
         // https://eslint.org/docs/rules/no-sync
+        'handle-callback-err': 'error',
+        'no-buffer-constructor': 'error',
         // stylistic
-        // https://eslint.org/docs/rules/array-bracket-newline
-        // https://eslint.org/docs/rules/array-bracket-spacing
-        // https://eslint.org/docs/rules/array-element-newline
-        // https://eslint.org/docs/rules/block-spacing
-        // https://eslint.org/docs/rules/brace-style
-        // https://eslint.org/docs/rules/camelcase
         // https://eslint.org/docs/rules/capitalized-comments
-        // https://eslint.org/docs/rules/comma-dangle
-        // https://eslint.org/docs/rules/comma-spacing
-        // https://eslint.org/docs/rules/comma-style
-        // https://eslint.org/docs/rules/computed-property-spacing
         // https://eslint.org/docs/rules/consistent-this
-        // https://eslint.org/docs/rules/eol-last
-        // https://eslint.org/docs/rules/func-call-spacing
         // https://eslint.org/docs/rules/func-name-matching
         // https://eslint.org/docs/rules/func-names
         // https://eslint.org/docs/rules/func-style
-        // https://eslint.org/docs/rules/function-paren-newline
         // https://eslint.org/docs/rules/id-blacklist
         // https://eslint.org/docs/rules/id-length
         // https://eslint.org/docs/rules/id-match
-        // https://eslint.org/docs/rules/implicit-arrow-linebreak
-        // https://eslint.org/docs/rules/indent
         // https://eslint.org/docs/rules/jsx-quotes
-        // https://eslint.org/docs/rules/key-spacing
-        // https://eslint.org/docs/rules/keyword-spacing
         // https://eslint.org/docs/rules/line-comment-position
-        // https://eslint.org/docs/rules/linebreak-style
         // https://eslint.org/docs/rules/lines-around-comment
-        // https://eslint.org/docs/rules/lines-between-class-members
+
         // https://eslint.org/docs/rules/max-depth
         // https://eslint.org/docs/rules/max-len
         // https://eslint.org/docs/rules/max-lines
@@ -275,6 +255,26 @@ module.exports = (deps) => {
         // https://eslint.org/docs/rules/template-tag-spacing
         // https://eslint.org/docs/rules/unicode-bom
         // https://eslint.org/docs/rules/wrap-regex
+        'array-bracket-newline': ['error', 'consistent'],
+        'array-bracket-spacing': ['error', 'never'],
+        'array-element-newline': ['error', 'consistent'],
+        'block-spacing': ['error', 'always'],
+        'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+        camelcase: 'error',
+        'comma-dangle': ['error', 'never'],
+        'comma-spacing': ['error', { before: false, after: true }],
+        'comma-style': ['error', 'last'],
+        'computed-property-spacing': ['error', 'never'],
+        'eol-last': ['error', 'always'],
+        'func-call-spacing': ['error', 'never'],
+        'function-paren-newline': ['error', 'multiline'],
+        'implicit-arrow-linebreak': ['error', 'beside'],
+        indent: ['error', 2, {
+          SwitchCase: 1
+        }],
+        'key-spacing': ['error', { mode: 'minimum' }],
+        'linebreak-style': ['error', 'unix'],
+        'lines-between-class-members': ['error', 'always']
         // es6
         // https://eslint.org/docs/rules/arrow-body-style
         // https://eslint.org/docs/rules/arrow-parens
