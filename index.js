@@ -46,7 +46,6 @@ module.exports = (deps) => async (args) => {
     rules: {
       // possible errors
       // https://eslint.org/docs/rules/no-console
-      // https://eslint.org/docs/rules/no-extra-parens
       // https://eslint.org/docs/rules/no-func-assign
       // https://eslint.org/docs/rules/no-inner-declarations
       // https://eslint.org/docs/rules/no-obj-calls
@@ -67,6 +66,7 @@ module.exports = (deps) => async (args) => {
       'no-empty': 'error',
       'no-ex-assign': 'error',
       'no-extra-boolean-cast': 'error',
+      'no-extra-parens': ['error', 'all', { enforceForArrowConditionals: false }],
       'no-extra-semi': 'error',
       'no-invalid-regexp': 'error',
       'no-irregular-whitespace': 'error',
