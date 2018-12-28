@@ -5,5 +5,5 @@ lint js and css
 ## Usage
 
 ```
-npx lint -h
+npx @erickmerchant/lint -h
 ```
