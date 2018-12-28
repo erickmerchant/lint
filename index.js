@@ -1,13 +1,14 @@
 const stylelint = require('stylelint')
-
 const eslint = require('eslint')
-
 const path = require('path')
-
 const globby = require('globby')
+const kleur = require('kleur')
+
+require('stylelint-config-standard')
 
 module.exports = (deps) => async (args) => {
   const files = await globby(args.files, { gitignore: true })
+  const errors = []
 
   await stylelint.lint({
     files: files.filter((file) => ['.css'].includes(path.extname(file))),
@@ -15,7 +16,7 @@ module.exports = (deps) => async (args) => {
     formatter (results) {
       for (const result of results.filter((r) => r.errored)) {
         for (const warning of result.warnings) {
-          console.log({
+          errors.push({
             file: result.source,
             line: warning.line,
             column: warning.column,
@@ -26,9 +27,19 @@ module.exports = (deps) => async (args) => {
 
       return ''
     },
+    configBasedir: __dirname,
     config: {
+      extends: 'stylelint-config-standard',
       rules: {
-        indentation: 2
+        'font-family-name-quotes': 'always-where-recommended',
+        'function-url-quotes': 'always',
+        'selector-attribute-quotes': 'always',
+        'string-quotes': 'single',
+        'at-rule-no-vendor-prefix': true,
+        'media-feature-name-no-vendor-prefix': true,
+        'property-no-vendor-prefix': true,
+        'selector-no-vendor-prefix': true,
+        'value-no-vendor-prefix': true
       }
     }
   })
@@ -243,7 +254,7 @@ module.exports = (deps) => async (args) => {
       'no-lonely-if': 'error',
       'no-mixed-operators': 'error',
       'no-multi-assign': 'error',
-      'no-multiple-empty-lines': 'error',
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
       'no-nested-ternary': 'error',
       'no-new-object': 'error',
       'no-trailing-spaces': 'error',
@@ -306,12 +317,11 @@ module.exports = (deps) => async (args) => {
     }
   })
 
-  // lint myfile.js and all files in lib/
   const report = cli.executeOnFiles(files.filter((file) => ['.mjs', '.js'].includes(path.extname(file))))
 
   for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
     for (const message of result.messages) {
-      console.log({
+      errors.push({
         file: result.filePath,
         line: message.line,
         column: message.column,
@@ -321,4 +331,14 @@ module.exports = (deps) => async (args) => {
   }
 
   CLIEngine.outputFixes(report)
+
+  if (errors.length) {
+    console.log(`${ kleur.gray('[dev]') } ${ errors.length } problem${ errors.length > 1 ? 's' : '' } found`)
+
+    for (const { file, line, column, message } of errors.sort((a, b) => a.file.localeCompare(b.file))) {
+      console.log(`  ${ file }:${ line }:${ column }: ${ message }`)
+    }
+
+    process.exit(1)
+  }
 }
