@@ -6,7 +6,7 @@
     "lint": "./cli.js"
   },
   "scripts": {
-    "test": "tape test.js"
+    "test": "node ./cli.js *.js && tape test.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
     "eslint": "^5.11.0",
     "globby": "^8.0.1",
     "kleur": "^3.0.1",
-    "sergeant": "^23.1.0",
     "stylelint": "^9.9.0",
     "stylelint-config-standard": "^18.2.0"
   },
