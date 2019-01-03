@@ -4,7 +4,8 @@ const stylelint = require('stylelint')
 const eslint = require('eslint')
 const path = require('path')
 const globby = require('globby')
-const { gray, green } = require('kleur')
+const {gray, green} = require('kleur')
+const outdent = require('outdent')
 
 require('stylelint-config-standard')
 
@@ -27,24 +28,24 @@ for (const arg of process.argv) {
 }
 
 if (args.help) {
-  console.error(`
-${ green('Usage:') } lint [--fix] [-h] [<files>]...
+  console.error(outdent`
+    ${green('Usage:')} lint [--fix] [-h] [<files>]...
 
-${ green('Parameters:') }
+    ${green('Parameters:')}
 
-<files>     what files to lint
+    <files>     what files to lint
 
-${ green('Options:') }
+    ${green('Options:')}
 
---fix       fix what can be fixed
--h, --help  get help
+    --fix       fix what can be fixed
+    -h, --help  get help
   `)
 
   process.exit(1)
 }
 
 (async () => {
-  const files = await globby(args.files, { gitignore: true })
+  const files = await globby(args.files, {gitignore: true})
   const errors = []
 
   await stylelint.lint({
@@ -114,7 +115,7 @@ ${ green('Options:') }
       'no-empty': 'error',
       'no-ex-assign': 'error',
       'no-extra-boolean-cast': 'error',
-      'no-extra-parens': ['error', 'all', { enforceForArrowConditionals: false }],
+      'no-extra-parens': ['error', 'all', {enforceForArrowConditionals: false}],
       'no-extra-semi': 'error',
       'no-invalid-regexp': 'error',
       'no-irregular-whitespace': 'error',
@@ -158,7 +159,7 @@ ${ green('Options:') }
       curly: ['error', 'multi-line'],
       'dot-location': ['error', 'property'],
       'dot-notation': 'error',
-      eqeqeq: ['error', 'always', { null: 'never' }],
+      eqeqeq: ['error', 'always', {null: 'never'}],
       'guard-for-in': 'error',
       'no-alert': 'error',
       'no-caller': 'error',
@@ -213,7 +214,7 @@ ${ green('Options:') }
       'no-shadow-restricted-names': 'error',
       'no-undef': 'error',
       'no-undef-init': 'error',
-      'no-unused-vars': ['error', { vars: 'all', args: 'none' }],
+      'no-unused-vars': ['error', {vars: 'all', args: 'none'}],
       // node.js
       // https://eslint.org/docs/rules/callback-return
       // https://eslint.org/docs/rules/global-require
@@ -269,10 +270,10 @@ ${ green('Options:') }
       'array-bracket-spacing': ['error', 'never'],
       'array-element-newline': ['error', 'consistent'],
       'block-spacing': ['error', 'always'],
-      'brace-style': ['error', '1tbs', { allowSingleLine: true }],
-      camelcase: 'error',
+      'brace-style': ['error', '1tbs', {allowSingleLine: true}],
+      camelcase: ['error', {properties: 'never'}],
       'comma-dangle': ['error', 'never'],
-      'comma-spacing': ['error', { before: false, after: true }],
+      'comma-spacing': ['error', {before: false, after: true}],
       'comma-style': ['error', 'last'],
       'computed-property-spacing': ['error', 'never'],
       'eol-last': ['error', 'always'],
@@ -282,7 +283,7 @@ ${ green('Options:') }
       indent: ['error', 2, {
         SwitchCase: 1
       }],
-      'key-spacing': ['error', { mode: 'minimum' }],
+      'key-spacing': ['error', {mode: 'minimum'}],
       'linebreak-style': ['error', 'unix'],
       'lines-between-class-members': ['error', 'always'],
       'multiline-ternary': ['error', 'always-multiline'],
@@ -291,24 +292,24 @@ ${ green('Options:') }
       'no-lonely-if': 'error',
       'no-mixed-operators': 'error',
       'no-multi-assign': 'error',
-      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
+      'no-multiple-empty-lines': ['error', {max: 1, maxEOF: 0}],
       'no-nested-ternary': 'error',
       'no-new-object': 'error',
       'no-trailing-spaces': 'error',
       'no-unneeded-ternary': 'error',
       'no-whitespace-before-property': 'error',
       'nonblock-statement-body-position': ['error', 'beside'],
-      'object-curly-newline': ['error', { consistent: true }],
-      'object-curly-spacing': ['error', 'always'],
-      'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+      'object-curly-newline': ['error', {consistent: true}],
+      'object-curly-spacing': ['error', 'never'],
+      'object-property-newline': ['error', {allowAllPropertiesOnSameLine: true}],
       'one-var': ['error', 'never'],
-      'operator-linebreak': ['error', 'before'],
+      'operator-linebreak': ['error', 'before', {overrides: {'=': 'after'}}],
       'padded-blocks': ['error', 'never'],
       'prefer-object-spread': 'error',
       'quote-props': ['error', 'as-needed'],
       quotes: ['error', 'single'],
       semi: ['error', 'never'],
-      'semi-spacing': ['error', { before: false, after: true }],
+      'semi-spacing': ['error', {before: false, after: true}],
       'semi-style': ['error', 'first'],
       'space-before-blocks': 'error',
       'space-before-function-paren': 'error',
@@ -330,8 +331,8 @@ ${ green('Options:') }
       'arrow-body-style': ['error', 'as-needed'],
       'arrow-parens': ['error', 'always'],
       'arrow-spacing': 'error',
-      'generator-star-spacing': ['error', { before: true, after: false }],
-      'no-confusing-arrow': ['error', { allowParens: true }],
+      'generator-star-spacing': ['error', {before: true, after: false}],
+      'no-confusing-arrow': ['error', {allowParens: true}],
       'no-const-assign': 'error',
       'no-dupe-class-members': 'error',
       'no-duplicate-imports': 'error',
@@ -349,7 +350,7 @@ ${ green('Options:') }
       'prefer-template': 'error',
       'rest-spread-spacing': ['error', 'never'],
       'symbol-description': 'error',
-      'template-curly-spacing': ['error', 'always'],
+      'template-curly-spacing': ['error', 'never'],
       'yield-star-spacing': ['error', 'both']
     }
   })
@@ -370,10 +371,10 @@ ${ green('Options:') }
   CLIEngine.outputFixes(report)
 
   if (errors.length) {
-    console.log(`${ gray('[dev]') } ${ errors.length } problem${ errors.length > 1 ? 's' : '' } found`)
+    console.log(`${gray('[dev]')} ${errors.length} problem${errors.length > 1 ? 's' : ''} found`)
 
-    for (const { file, line, column, message } of errors.sort((a, b) => a.file.localeCompare(b.file))) {
-      console.log(`  ${ file }:${ line }:${ column }: ${ message }`)
+    for (const {file, line, column, message} of errors.sort((a, b) => a.file.localeCompare(b.file))) {
+      console.log(`  ${file}:${line}:${column}: ${message}`)
     }
 
     process.exit(1)
