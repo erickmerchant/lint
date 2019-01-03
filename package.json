@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "node ./cli.js *.js && tape test.js",
-    "prepare": "ncc build index.js -m -s -o dist/"
+    "prepare": "del dist && ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",
@@ -18,12 +18,13 @@
   "license": "ISC",
   "devDependencies": {
     "@zeit/ncc": "^0.8.1",
+    "del-cli": "^1.1.0",
     "eslint": "^5.11.0",
     "execa": "^1.0.0",
     "globby": "^8.0.1",
     "kleur": "^3.0.1",
-    "stylelint-config-standard": "^18.2.0",
     "stylelint": "^9.9.0",
+    "stylelint-config-standard": "^18.2.0",
     "tape": "^4.9.2"
   }
 }
