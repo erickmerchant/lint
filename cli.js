@@ -303,7 +303,7 @@ if (args.help) {
       'object-curly-spacing': ['error', 'never'],
       'object-property-newline': ['error', {allowAllPropertiesOnSameLine: true}],
       'one-var': ['error', 'never'],
-      'operator-linebreak': ['error', 'before', {overrides: {'=': 'after'}}],
+      'operator-linebreak': ['error', 'none', {overrides: {'?': 'before', ':': 'before'}}],
       'padded-blocks': ['error', 'never'],
       'prefer-object-spread': 'error',
       'quote-props': ['error', 'as-needed'],
@@ -328,7 +328,7 @@ if (args.help) {
       // https://eslint.org/docs/rules/prefer-numeric-literals
       // https://eslint.org/docs/rules/require-yield
       // https://eslint.org/docs/rules/sort-imports
-      'arrow-body-style': ['error', 'as-needed'],
+      'arrow-body-style': ['error', 'as-needed', {requireReturnForObjectLiteral: true}],
       'arrow-parens': ['error', 'always'],
       'arrow-spacing': 'error',
       'generator-star-spacing': ['error', {before: true, after: false}],
