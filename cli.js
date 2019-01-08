@@ -51,7 +51,7 @@ if (args.help) {
   await stylelint.lint({
     files: files.filter((file) => ['.css'].includes(path.extname(file))),
     fix: args.fix,
-    formatter (results) {
+    formatter(results) {
       for (const result of results.filter((r) => r.errored)) {
         for (const warning of result.warnings) {
           errors.push({
@@ -77,7 +77,8 @@ if (args.help) {
         'media-feature-name-no-vendor-prefix': true,
         'property-no-vendor-prefix': true,
         'selector-no-vendor-prefix': true,
-        'value-no-vendor-prefix': true
+        'value-no-vendor-prefix': true,
+        indentation: 2
       }
     }
   })
@@ -284,6 +285,7 @@ if (args.help) {
         SwitchCase: 1
       }],
       'key-spacing': ['error', {mode: 'minimum'}],
+      'keyword-spacing': ['error', {before: true, after: true}],
       'linebreak-style': ['error', 'unix'],
       'lines-between-class-members': ['error', 'always'],
       'multiline-ternary': ['error', 'always-multiline'],
@@ -312,7 +314,7 @@ if (args.help) {
       'semi-spacing': ['error', {before: false, after: true}],
       'semi-style': ['error', 'first'],
       'space-before-blocks': 'error',
-      'space-before-function-paren': 'error',
+      'space-before-function-paren': ['error', {anonymous: 'always', named: 'never', asyncArrow: 'always'}],
       'space-in-parens': ['error', 'never'],
       'space-infix-ops': 'error',
       'space-unary-ops': 'error',

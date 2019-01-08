@@ -6,7 +6,8 @@
     "lint": "./cli.js"
   },
   "scripts": {
-    "test": "node ./cli.js *.js && tape test.js"
+    "pretest": "node ./cli.js *.js",
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
