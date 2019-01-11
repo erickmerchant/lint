@@ -33,12 +33,12 @@ if (args.help) {
 
     ${green('Parameters:')}
 
-    <files>     what files to lint
+     <files>     what files to lint
 
     ${green('Options:')}
 
-    --fix       fix what can be fixed
-    -h, --help  get help
+     --fix       fix what can be fixed
+     -h, --help  get help
   `)
 
   process.exit(1)
