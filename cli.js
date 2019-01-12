@@ -96,6 +96,7 @@ if (args.help) {
     rules: {
       // possible errors
       // https://eslint.org/docs/rules/no-console
+      // https://eslint.org/docs/rules/no-extra-boolean-cast
       // https://eslint.org/docs/rules/no-func-assign
       // https://eslint.org/docs/rules/no-inner-declarations
       // https://eslint.org/docs/rules/no-obj-calls
@@ -115,7 +116,6 @@ if (args.help) {
       'no-empty-character-class': 'error',
       'no-empty': 'error',
       'no-ex-assign': 'error',
-      'no-extra-boolean-cast': 'error',
       'no-extra-parens': ['error', 'all', {enforceForArrowConditionals: false}],
       'no-extra-semi': 'error',
       'no-invalid-regexp': 'error',
