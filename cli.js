@@ -15,7 +15,7 @@ const args = {
   fix: false
 }
 
-for (const arg of process.argv) {
+for (const arg of process.argv.slice(2)) {
   if (arg.startsWith('-') && !arg.startsWith('---')) {
     if (arg === '--fix') {
       args.fix = true
@@ -27,9 +27,16 @@ for (const arg of process.argv) {
   }
 }
 
+if (!args.files.length) {
+  args.help = true
+}
+
 if (args.help) {
-  console.error(outdent`
-    ${green('Usage:')} lint [--fix] [-h] [<files>]...
+  console.log(outdent`
+
+    ${green('Description:')} lint js and css
+
+    ${green('Usage:')} lint [--fix] [-h] <files>...
 
     ${green('Parameters:')}
 
@@ -39,6 +46,7 @@ if (args.help) {
 
      --fix       fix what can be fixed
      -h, --help  get help
+
   `)
 
   process.exit(1)

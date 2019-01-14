@@ -16,6 +16,6 @@ test('cli.js', async (t) => {
   } catch (e) {
     t.ok(e)
 
-    t.equal(e.stderr.includes('Usage'), true)
+    t.equal(e.stdout.includes('Usage'), true)
   }
 })
