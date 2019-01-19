@@ -21,7 +21,7 @@
     "globby": "^9.0.0",
     "kleur": "^3.0.1",
     "outdent": "^0.7.0",
-    "stylelint": "^9.9.0",
+    "stylelint": "^9.10.1",
     "stylelint-config-standard": "^18.2.0"
   },
   "devDependencies": {
