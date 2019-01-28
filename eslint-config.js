@@ -3,7 +3,9 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
+  plugins: ['@erickmerchant'],
   rules: {
+    '@erickmerchant/no-functions': 'error',
     // possible errors
     // https://eslint.org/docs/rules/no-console
     // https://eslint.org/docs/rules/no-extra-boolean-cast
