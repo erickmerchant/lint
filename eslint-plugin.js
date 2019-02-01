@@ -1,16 +1,16 @@
 module.exports = {
   rules: {
-    'no-functions': {
+    'no-func-keyword': {
       create(context) {
-        const noFunction = (node) => {
+        const noFuncKeyword = (node) => {
           if (!node.generator && node.parent.type !== 'Property') {
             context.report(node, 'Use an arrow function instead')
           }
         }
 
         return {
-          FunctionExpression: noFunction,
-          FunctionDeclaration: noFunction
+          FunctionExpression: noFuncKeyword,
+          FunctionDeclaration: noFuncKeyword
         }
       }
     }

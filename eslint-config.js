@@ -5,7 +5,7 @@ module.exports = {
   },
   plugins: ['@erickmerchant'],
   rules: {
-    '@erickmerchant/no-functions': 'error',
+    '@erickmerchant/no-func-keyword': 'error',
     // possible errors
     // https://eslint.org/docs/rules/no-console
     // https://eslint.org/docs/rules/no-extra-boolean-cast
