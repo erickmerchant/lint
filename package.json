@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "execa": "^1.0.0",
-    "tape": "^4.9.2"
+    "tape": "^4.10.0"
   }
 }
