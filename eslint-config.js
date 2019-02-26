@@ -28,7 +28,10 @@ module.exports = {
     'no-empty-character-class': 'error',
     'no-empty': 'error',
     'no-ex-assign': 'error',
-    'no-extra-parens': ['error', 'all', {enforceForArrowConditionals: false}],
+    'no-extra-parens': ['error', 'all', {
+      enforceForArrowConditionals: false,
+      nestedBinaryExpressions: false
+    }],
     'no-extra-semi': 'error',
     'no-invalid-regexp': 'error',
     'no-irregular-whitespace': 'error',
