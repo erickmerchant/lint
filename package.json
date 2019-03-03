@@ -17,16 +17,16 @@
   "author": "Erick Merchant <erickmerchant@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^5.15.0",
     "globby": "^9.0.0",
     "kleur": "^3.0.2",
     "mock-require": "^3.0.3",
     "outdent": "^0.7.0",
-    "stylelint": "^9.10.1",
     "stylelint-config-standard": "^18.2.0"
   },
   "devDependencies": {
+    "eslint": "^5.15.0",
     "execa": "^1.0.0",
+    "stylelint": "^9.10.1",
     "tape": "^4.10.0"
   }
 }

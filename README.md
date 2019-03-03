@@ -1,9 +1,9 @@
 # @erickmerchant/lint
 
-lint js and css
+Lint js and/or css. If you don't need to lint js, eslint is optional. If you don't need to lint css, stylelint is optional.
 
-## Usage
+## Install
 
 ```
-npx @erickmerchant/lint -h
+npm i --save-dev eslint stylelint @erickmerchant/lint
 ```
