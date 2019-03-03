@@ -28,5 +28,9 @@
     "execa": "^1.0.0",
     "stylelint": "^9.10.1",
     "tape": "^4.10.0"
+  },
+  "peerDependencies": {
+    "eslint": "^5.15.0",
+    "stylelint": "^9.10.1"
   }
 }

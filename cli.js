@@ -8,9 +8,9 @@ const {gray, green} = require('kleur')
 const outdent = require('outdent')
 const mock = require('mock-require')
 
-mock('@erickmerchant/eslint-plugin', require('./eslint-plugin.js'))
-
 require('stylelint-config-standard')
+
+mock('@erickmerchant/eslint-plugin', require('./eslint-plugin.js'))
 
 const args = {
   files: [],
@@ -62,7 +62,7 @@ if (args.help) {
 
   linters.push({
     extensions: ['.css'],
-    module: 'stylelint',
+    module() { return require('stylelint') },
     async lint(stylelint, files) {
       await stylelint.lint({
         files,
@@ -89,7 +89,7 @@ if (args.help) {
 
   linters.push({
     extensions: ['.mjs', '.js'],
-    module: 'eslint',
+    module() { return require('eslint') },
     lint(eslint, files) {
       const CLIEngine = eslint.CLIEngine
 
@@ -119,7 +119,7 @@ if (args.help) {
 
   await Promise.all(linters.map((linter) => {
     try {
-      const _module = require(linter.module)
+      const _module = linter.module()
 
       return linter.lint(_module, files.filter((file) => linter.extensions.includes(path.extname(file))))
     } catch (err) {
