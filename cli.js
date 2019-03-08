@@ -61,7 +61,7 @@ if (args.help) {
   const linters = []
 
   linters.push({
-    extensions: ['.css'],
+    extensions: ['.css', '.html'],
     module() { return require('stylelint') },
     async lint(stylelint, files) {
       await stylelint.lint({
@@ -88,8 +88,14 @@ if (args.help) {
   })
 
   linters.push({
-    extensions: ['.mjs', '.js'],
-    module() { return require('eslint') },
+    extensions: ['.mjs', '.js', '.html'],
+    module() {
+      const eslint = require('eslint')
+
+      require('eslint-plugin-html')
+
+      return eslint
+    },
     lint(eslint, files) {
       const CLIEngine = eslint.CLIEngine
 

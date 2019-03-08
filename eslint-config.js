@@ -3,7 +3,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['@erickmerchant'],
+  plugins: ['@erickmerchant', 'html'],
   rules: {
     '@erickmerchant/no-func-keyword': 'error',
     // possible errors
