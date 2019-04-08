@@ -19,7 +19,7 @@
   "dependencies": {
     "eslint-plugin-html": "^5.0.3",
     "globby": "^9.2.0",
-    "kleur": "^3.0.2",
+    "kleur": "^3.0.3",
     "mock-require": "^3.0.3",
     "outdent": "^0.7.0",
     "stylelint-config-standard": "^18.2.0"
