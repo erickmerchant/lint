@@ -1,6 +1,6 @@
 {
   "name": "@erickmerchant/lint",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "lint js and css",
   "bin": {
     "lint": "./cli.js"
