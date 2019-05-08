@@ -67,6 +67,7 @@ if (args.help) {
       await stylelint.lint({
         files,
         fix: args.fix,
+        allowEmptyInput: true,
         formatter(results) {
           for (const result of results.filter((r) => r.errored)) {
             for (const warning of result.warnings) {
