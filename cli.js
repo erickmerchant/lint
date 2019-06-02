@@ -102,7 +102,7 @@ if (args.help) {
 
       const cli = new CLIEngine({
         fix: args.fix,
-        envs: {browser: true, node: true},
+        envs: ['browser', 'node', 'es6'],
         useEslintrc: false,
         ...eslintConfig
       })
@@ -125,11 +125,19 @@ if (args.help) {
   })
 
   await Promise.all(linters.map((linter) => {
-    try {
-      const _module = linter.module()
+    let _module
 
+    try {
+      _module = linter.module()
+    } catch (err) {
+      return true
+    }
+
+    try {
       return linter.lint(_module, files.filter((file) => linter.extensions.includes(path.extname(file))))
     } catch (err) {
+      console.error(err)
+
       return true
     }
   }))

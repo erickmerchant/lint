@@ -197,7 +197,8 @@ module.exports = {
     'function-paren-newline': ['error', 'multiline'],
     'implicit-arrow-linebreak': ['error', 'beside'],
     indent: ['error', 2, {
-      SwitchCase: 1
+      SwitchCase: 1,
+      ignoredNodes: ['TemplateLiteral[expressions] *']
     }],
     'key-spacing': ['error', {mode: 'minimum'}],
     'keyword-spacing': ['error', {before: true, after: true}],
