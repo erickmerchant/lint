@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2019,
     sourceType: 'module'
   },
   plugins: ['@erickmerchant', 'html'],
@@ -197,8 +197,7 @@ module.exports = {
     'function-paren-newline': ['error', 'multiline'],
     'implicit-arrow-linebreak': ['error', 'beside'],
     indent: ['error', 2, {
-      SwitchCase: 1,
-      ignoreNodes: ['TemplateElement']
+      SwitchCase: 1
     }],
     'key-spacing': ['error', {mode: 'minimum'}],
     'keyword-spacing': ['error', {before: true, after: true}],

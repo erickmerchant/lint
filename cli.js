@@ -102,7 +102,7 @@ if (args.help) {
 
       const cli = new CLIEngine({
         fix: args.fix,
-        envs: ['es6', 'node'],
+        envs: {browser: true, node: true},
         useEslintrc: false,
         ...eslintConfig
       })
