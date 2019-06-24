@@ -6,11 +6,8 @@ const path = require('path')
 const globby = require('globby')
 const {gray, green} = require('kleur')
 const outdent = require('outdent')
-const mock = require('mock-require')
 
 require('stylelint-config-standard')
-
-mock('@erickmerchant/eslint-plugin', require('./eslint-plugin.js'))
 
 const args = {
   files: [],

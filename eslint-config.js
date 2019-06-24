@@ -1,11 +1,14 @@
+const path = require('path')
+
 module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module'
   },
-  plugins: ['@erickmerchant', 'html'],
+  rulePaths: [path.join(__dirname, 'rules')],
+  plugins: ['html'],
   rules: {
-    '@erickmerchant/no-func-keyword': 'error',
+    'no-func-keyword': 'error',
     // possible errors
     // https://eslint.org/docs/rules/no-console
     // https://eslint.org/docs/rules/no-extra-boolean-cast
