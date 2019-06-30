@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "eslint-plugin-html": "^6.0.0",
-    "globby": "^9.2.0",
+    "globby": "^10.0.0",
     "kleur": "^3.0.3",
     "outdent": "^0.7.0",
     "stylelint-config-standard": "^18.3.0"
