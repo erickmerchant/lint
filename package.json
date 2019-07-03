@@ -30,7 +30,7 @@
     "tape": "^4.11.0"
   },
   "peerDependencies": {
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "stylelint": "^10.1.0"
   },
   "engines": {
