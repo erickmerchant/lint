@@ -1,6 +1,18 @@
 const path = require('path')
+let parser
+
+try {
+  require('babel-eslint')
+
+  parser = 'babel-eslint'
+} catch (err) {
+  parser = 'espree'
+}
+
+console.log(parser)
 
 module.exports = {
+  parser,
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module'
