@@ -9,8 +9,6 @@ try {
   parser = 'espree'
 }
 
-console.log(parser)
-
 module.exports = {
   parser,
   parserOptions: {
