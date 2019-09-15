@@ -21,19 +21,19 @@
     "globby": "^10.0.1",
     "kleur": "^3.0.3",
     "outdent": "^0.7.0",
-    "stylelint-config-standard": "^18.3.0"
+    "stylelint-config-standard": "^19.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
     "execa": "^2.0.4",
-    "stylelint": "^10.1.0",
+    "stylelint": "^11.0.0",
     "tape": "^4.11.0"
   },
   "peerDependencies": {
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.2.2",
-    "stylelint": "^10.1.0"
+    "eslint": "^6.4.0",
+    "stylelint": "^11.0.0"
   },
   "engines": {
     "node": ">=10"
