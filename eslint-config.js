@@ -17,6 +17,7 @@ module.exports = {
   },
   rulePaths: [path.join(__dirname, 'rules')],
   plugins: ['html'],
+  resolvePluginsRelativeTo: __dirname,
   rules: {
     'no-func-keyword': 'error',
     // possible errors
