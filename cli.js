@@ -4,7 +4,7 @@ const stylelintConfig = require('./stylelint-config.js')
 const eslintConfig = require('./eslint-config.js')
 const path = require('path')
 const globby = require('globby')
-const {gray, green} = require('kleur')
+const {gray, green, red} = require('kleur')
 const outdent = require('outdent')
 
 require('stylelint-config-standard')
@@ -53,98 +53,104 @@ if (args.help) {
 }
 
 (async () => {
-  const files = await globby(args.files, {gitignore: true})
-  const errors = []
-  const linters = []
+  try {
+    const files = await globby(args.files.map((file) => path.resolve(file)), {gitignore: true})
+    const errors = []
+    const linters = []
 
-  linters.push({
-    extensions: ['.css', '.html'],
-    module() { return require('stylelint') },
-    async lint(stylelint, files) {
-      await stylelint.lint({
-        files,
-        fix: args.fix,
-        allowEmptyInput: true,
-        formatter(results) {
-          for (const result of results.filter((r) => r.errored)) {
-            for (const warning of result.warnings) {
-              errors.push({
-                file: result.source,
-                line: warning.line,
-                column: warning.column,
-                message: warning.text
-              })
+    linters.push({
+      extensions: ['.css', '.html'],
+      module() { return require('stylelint') },
+      async lint(stylelint, files) {
+        await stylelint.lint({
+          files,
+          fix: args.fix,
+          allowEmptyInput: true,
+          formatter(results) {
+            for (const result of results.filter((r) => r.errored)) {
+              for (const warning of result.warnings) {
+                errors.push({
+                  file: result.source,
+                  line: warning.line,
+                  column: warning.column,
+                  message: warning.text
+                })
+              }
             }
+
+            return ''
+          },
+          configBasedir: __dirname,
+          config: stylelintConfig
+        })
+      }
+    })
+
+    linters.push({
+      extensions: ['.mjs', '.js', '.html'],
+      module() {
+        const eslint = require('eslint')
+
+        require('eslint-plugin-html')
+
+        return eslint
+      },
+      lint(eslint, files) {
+        const CLIEngine = eslint.CLIEngine
+
+        const cli = new CLIEngine({
+          fix: args.fix,
+          envs: ['browser', 'node', 'es6'],
+          useEslintrc: false,
+          ...eslintConfig
+        })
+
+        const report = cli.executeOnFiles(files)
+
+        for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
+          for (const message of result.messages) {
+            errors.push({
+              file: result.filePath,
+              line: message.line,
+              column: message.column,
+              message: message.message
+            })
           }
-
-          return ''
-        },
-        configBasedir: __dirname,
-        config: stylelintConfig
-      })
-    }
-  })
-
-  linters.push({
-    extensions: ['.mjs', '.js', '.html'],
-    module() {
-      const eslint = require('eslint')
-
-      require('eslint-plugin-html')
-
-      return eslint
-    },
-    lint(eslint, files) {
-      const CLIEngine = eslint.CLIEngine
-
-      const cli = new CLIEngine({
-        fix: args.fix,
-        envs: ['browser', 'node', 'es6'],
-        useEslintrc: false,
-        ...eslintConfig
-      })
-
-      const report = cli.executeOnFiles(files)
-
-      for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
-        for (const message of result.messages) {
-          errors.push({
-            file: result.filePath,
-            line: message.line,
-            column: message.column,
-            message: message.message
-          })
         }
+
+        CLIEngine.outputFixes(report)
+      }
+    })
+
+    await Promise.all(linters.map((linter) => {
+      let _module
+
+      try {
+        _module = linter.module()
+      } catch (err) {
+        return true
       }
 
-      CLIEngine.outputFixes(report)
+      try {
+        return linter.lint(_module, files.filter((file) => linter.extensions.includes(path.extname(file))))
+      } catch (err) {
+        console.error(err)
+
+        return true
+      }
+    }))
+
+    if (errors.length) {
+      console.log(`${gray('[dev]')} ${errors.length} problem${errors.length > 1 ? 's' : ''} found`)
+
+      for (const {file, line, column, message} of errors.sort((a, b) => a.file.localeCompare(b.file))) {
+        console.log(`  ${file}:${line}:${column}: ${message}`)
+      }
+
+      process.exit(1)
     }
-  })
-
-  await Promise.all(linters.map((linter) => {
-    let _module
-
-    try {
-      _module = linter.module()
-    } catch (err) {
-      return true
-    }
-
-    try {
-      return linter.lint(_module, files.filter((file) => linter.extensions.includes(path.extname(file))))
-    } catch (err) {
-      console.error(err)
-
-      return true
-    }
-  }))
-
-  if (errors.length) {
-    console.log(`${gray('[dev]')} ${errors.length} problem${errors.length > 1 ? 's' : ''} found`)
-
-    for (const {file, line, column, message} of errors.sort((a, b) => a.file.localeCompare(b.file))) {
-      console.log(`  ${file}:${line}:${column}: ${message}`)
-    }
+  } catch (err) {
+    console.error(red(err))
 
     process.exit(1)
   }

@@ -2,7 +2,9 @@ const path = require('path')
 let parser
 
 try {
-  require('babel-eslint')
+  // require('babel-eslint')
+
+  require.resolve('babel-eslint', {paths: [process.cwd()]})
 
   parser = 'babel-eslint'
 } catch (err) {
