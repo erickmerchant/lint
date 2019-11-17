@@ -7,8 +7,6 @@ const globby = require('globby')
 const {gray, green, red} = require('kleur')
 const outdent = require('outdent')
 
-require('stylelint-config-standard')
-
 const args = {
   files: [],
   help: false,
