@@ -6,7 +6,7 @@
     "lint": "./cli.js"
   },
   "scripts": {
-    "pretest": "node ./cli.js *.js",
+    "pretest": "node ./cli.js *.js **/*.js",
     "test": "tape test.js"
   },
   "repository": {
