@@ -18,17 +18,19 @@ module.exports = stylelint.createPlugin(ruleName, (primaryOption) => {
 
         const allPseudos = selectors.nodes.every((node) => node.nodes.some((n) => n.type === 'pseudo'))
 
-        const str = `${decl.prop}: ${decl.value}`
+        if (!allPseudos) {
+          const str = `${decl.prop}: ${decl.value}`
 
-        if (found.includes(str) && !allPseudos) {
-          stylelint.utils.report({
-            message: messages.rejected(str),
-            node: decl,
-            result,
-            ruleName
-          })
-        } else {
-          found.push(str)
+          if (found.includes(str)) {
+            stylelint.utils.report({
+              message: messages.rejected(str),
+              node: decl,
+              result,
+              ruleName
+            })
+          } else {
+            found.push(str)
+          }
         }
       }
     })
