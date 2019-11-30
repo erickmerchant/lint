@@ -21,6 +21,7 @@
     "globby": "^10.0.1",
     "kleur": "^3.0.3",
     "outdent": "^0.7.0",
+    "postcss-selector-parser": "^6.0.2",
     "stylelint-config-standard": "^19.0.0"
   },
   "devDependencies": {
