@@ -9,6 +9,14 @@
     "pretest": "node ./cli.js *.js **/*.js",
     "test": "tape test.js"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "rules/",
+    "cli.js",
+    "eslint-config.js",
+    "stylelint-config.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erickmerchant/lint.git"
