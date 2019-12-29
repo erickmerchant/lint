@@ -1,10 +1,28 @@
 {
   "name": "@erickmerchant/lint",
-  "description": "lint js and css",
   "version": "3.6.2",
+  "description": "lint js and css",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erickmerchant/lint.git"
+  },
+  "license": "ISC",
   "author": "Erick Merchant <erickmerchant@gmail.com>",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "rules/",
+    "cli.js",
+    "eslint-config.js",
+    "stylelint-config.js"
+  ],
   "bin": {
     "lint": "./cli.js"
+  },
+  "scripts": {
+    "pretest": "node ./cli.js *.js **/*.js",
+    "test": "tape test.js"
   },
   "dependencies": {
     "eslint-plugin-html": "^6.0.0",
@@ -20,30 +38,12 @@
     "stylelint": "^12.0.1",
     "tape": "^4.12.1"
   },
-  "engines": {
-    "node": ">=12"
-  },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "rules/",
-    "cli.js",
-    "eslint-config.js",
-    "stylelint-config.js"
-  ],
-  "keywords": [],
-  "license": "ISC",
   "peerDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "stylelint": "^12.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/erickmerchant/lint.git"
-  },
-  "scripts": {
-    "pretest": "node ./cli.js *.js **/*.js",
-    "test": "tape test.js"
+  "engines": {
+    "node": ">=12"
   }
 }
