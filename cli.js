@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
-const stylelintConfig = require('./stylelint-config.js')
+const eslint = require('eslint')
 const eslintConfig = require('./eslint-config.js')
 const path = require('path')
 const globby = require('globby')
 const {gray, green, red} = require('kleur')
 const outdent = require('outdent')
 
+require('eslint-plugin-html')
+
+const extensions = ['.mjs', '.js', '.html']
 const args = {
   files: [],
   help: false,
@@ -52,91 +55,35 @@ if (args.help) {
 
 (async () => {
   try {
-    const files = await globby(args.files.map((file) => path.resolve(file)), {gitignore: true})
+    let files = await globby(args.files.map((file) => path.resolve(file)), {gitignore: true})
+
+    files = files.filter((file) => extensions.includes(path.extname(file)))
+
     const errors = []
-    const linters = []
 
-    linters.push({
-      extensions: ['.css', '.html'],
-      module() { return require('stylelint') },
-      async lint(stylelint, files) {
-        await stylelint.lint({
-          files,
-          fix: args.fix,
-          allowEmptyInput: true,
-          formatter(results) {
-            for (const result of results.filter((r) => r.errored)) {
-              for (const warning of result.warnings) {
-                errors.push({
-                  file: result.source,
-                  line: warning.line,
-                  column: warning.column,
-                  message: warning.text
-                })
-              }
-            }
+    const CLIEngine = eslint.CLIEngine
 
-            return ''
-          },
-          configBasedir: __dirname,
-          config: stylelintConfig
-        })
-      }
+    const cli = new CLIEngine({
+      fix: args.fix,
+      envs: ['browser', 'node', 'es6'],
+      useEslintrc: false,
+      ...eslintConfig
     })
 
-    linters.push({
-      extensions: ['.mjs', '.js', '.html'],
-      module() {
-        const eslint = require('eslint')
+    const report = cli.executeOnFiles(files)
 
-        require('eslint-plugin-html')
-
-        return eslint
-      },
-      lint(eslint, files) {
-        const CLIEngine = eslint.CLIEngine
-
-        const cli = new CLIEngine({
-          fix: args.fix,
-          envs: ['browser', 'node', 'es6'],
-          useEslintrc: false,
-          ...eslintConfig
+    for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
+      for (const message of result.messages) {
+        errors.push({
+          file: result.filePath,
+          line: message.line,
+          column: message.column,
+          message: message.message
         })
-
-        const report = cli.executeOnFiles(files)
-
-        for (const result of report.results.filter((r) => r.errorCount || r.warningCount)) {
-          for (const message of result.messages) {
-            errors.push({
-              file: result.filePath,
-              line: message.line,
-              column: message.column,
-              message: message.message
-            })
-          }
-        }
-
-        CLIEngine.outputFixes(report)
       }
-    })
+    }
 
-    await Promise.all(linters.map((linter) => {
-      let _module
-
-      try {
-        _module = linter.module()
-      } catch (err) {
-        return true
-      }
-
-      try {
-        return linter.lint(_module, files.filter((file) => linter.extensions.includes(path.extname(file))))
-      } catch (err) {
-        console.error(err)
-
-        return true
-      }
-    }))
+    CLIEngine.outputFixes(report)
 
     if (errors.length) {
       console.log(`${gray('[dev]')} ${errors.length} problem${errors.length > 1 ? 's' : ''} found`)

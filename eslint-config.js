@@ -1,15 +1,7 @@
 const path = require('path')
-let parser
+const parser = require.resolve('babel-eslint', {paths: [__dirname]})
 
-try {
-  // require('babel-eslint')
-
-  require.resolve('babel-eslint', {paths: [process.cwd()]})
-
-  parser = 'babel-eslint'
-} catch (err) {
-  parser = 'espree'
-}
+// require('babel-eslint')
 
 module.exports = {
   parser,
