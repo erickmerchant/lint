@@ -9,7 +9,7 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module'
   },
-  rulePaths: [path.join(__dirname, 'rules')],
+  rulePaths: [path.join(__dirname, 'lib', 'rules')],
   plugins: ['html'],
   resolvePluginsRelativeTo: __dirname,
   rules: {
