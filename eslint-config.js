@@ -257,7 +257,7 @@ module.exports = {
     'arrow-body-style': ['error', 'as-needed', {requireReturnForObjectLiteral: true}],
     'arrow-parens': ['error', 'always'],
     'arrow-spacing': 'error',
-    'generator-star-spacing': ['error', {before: true, after: false}],
+    'generator-star-spacing': ['error', {before: true, after: true}],
     'no-confusing-arrow': ['error', {allowParens: true}],
     'no-const-assign': 'error',
     'no-dupe-class-members': 'error',
