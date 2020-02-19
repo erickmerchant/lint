@@ -1,7 +1,7 @@
 {
   "name": "@erickmerchant/lint",
   "version": "4.1.0",
-  "description": "lint js and css",
+  "description": "Lint js.",
   "keywords": [],
   "repository": {
     "type": "git",
