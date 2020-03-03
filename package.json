@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "execa": "^4.0.0",
-    "tape": "^4.13.0"
+    "tape": "^4.13.2"
   },
   "peerDependencies": {
     "babel-eslint": "^10.0.3"
