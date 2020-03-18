@@ -29,7 +29,7 @@
     "eslint-plugin-html": "^6.0.0",
     "globby": "^11.0.0",
     "kleur": "^3.0.3",
-    "outdent": "^0.7.0"
+    "outdent": "^0.7.1"
   },
   "devDependencies": {
     "execa": "^4.0.0",
