@@ -231,7 +231,7 @@ module.exports = {
     'one-var': ['error', 'never'],
     'operator-linebreak': ['error', 'none', {overrides: {'?': 'before', ':': 'before'}}],
     'padded-blocks': ['error', 'never'],
-    'prefer-object-spread': 'error',
+    // 'prefer-object-spread': 'error',
     'quote-props': ['error', 'as-needed'],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
