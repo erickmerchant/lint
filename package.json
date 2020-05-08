@@ -25,14 +25,13 @@
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-plugin-html": "^6.0.2",
     "globby": "^11.0.0",
     "kleur": "^3.0.3",
     "outdent": "^0.7.1"
   },
   "devDependencies": {
-    "execa": "^4.0.0",
     "tape": "^5.0.0"
   },
   "engines": {
