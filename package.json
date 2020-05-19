@@ -21,7 +21,7 @@
   },
   "scripts": {
     "pretest": "node ./cli.js *.js lib/**/*.js",
-    "test": "tape test.js"
+    "test": "node test.js"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
@@ -31,9 +31,7 @@
     "kleur": "^3.0.3",
     "outdent": "^0.7.1"
   },
-  "devDependencies": {
-    "tape": "^5.0.0"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=14.2"
   }
